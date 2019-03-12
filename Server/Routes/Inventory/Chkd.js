@@ -39,7 +39,7 @@ router.get('/:chkdId', function(req, res) {
       function(result, fields, cb) {
          if (vld.check(result.length, Tags.notFound, null, cb)) {
             result[0].whenChecked = result[0].whenChecked.getTime();
-            res.status(STATUS_200).json(result[0]);
+            res.status(STATUS_200).json(result);
             cb();
          }
       }],
