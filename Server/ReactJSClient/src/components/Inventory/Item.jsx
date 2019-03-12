@@ -1,0 +1,34 @@
+import React, { Component } from 'react';
+import { Image, Button, Row, Col } from 'react-bootstrap';
+import './Inventory.css';
+
+class Item extends Component {
+   
+   render() {
+      var { item } = this.props;
+
+      return (
+
+            <div className="item">
+            <span
+               onClick={() => this.props.deleteItem(item)} 
+               className="remove-item">X</span>
+            <div className="content">
+               <Image rounded src="favicon.ico" />
+               <h4>{item.itemName}</h4>
+               <div>Quantity: {item.quantity}</div>
+               <Button 
+                  className="item-button"
+                  onClick={() => this.props.openCheckOut(item)}>
+                  Checkout
+               </Button>
+               <Button className="item-button">
+                  Items In Use
+               </Button>  
+            </div>
+            </div>
+      );
+   }
+}
+
+export default Item;

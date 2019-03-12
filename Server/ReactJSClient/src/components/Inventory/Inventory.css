@@ -1,0 +1,35 @@
+.item {
+   position: relative;
+   min-width: 260px;
+   border: 2px solid grey;
+   margin: 15px;
+   text-align: center;
+   border-radius: 5px;
+   box-shadow: 5px 5px 2px grey;
+   transform: scale(1);
+   transition: box-shadow 0.2s, transform 0.2s;
+}
+.item .remove-item {
+   cursor: pointer;
+   padding: 3px;
+   position: absolute;
+   top: 6px;
+   right: 10px;
+   font-weight: bold;
+   font-size: 1.2em;
+}
+.item:hover {
+   box-shadow: 10px 10px 5px grey;
+   transform: scale(1);
+   transition: box-shadow 0.2s, transform 0.2s;
+}
+.list-group {
+   width: 100%;
+}
+.item .content {
+   padding: 15px;
+}
+.item .item-button {
+   display: block;
+   margin: auto;
+}
