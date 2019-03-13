@@ -32,4 +32,5 @@
 .item .item-button {
    display: block;
    margin: auto;
+   margin-top: 10px;
 }

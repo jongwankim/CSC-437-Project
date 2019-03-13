@@ -174,8 +174,25 @@ export function addInvt(item) {
     });
 }
 
+export function updateQuantity(id, quantity) {
+   return put('Invt/' + id, {quantity: quantity})
+    .then(() => get('Invt/'))
+    .then(res => res.json());
+}
+
 export function delInvt(id) {
    return del('Invt/' + id);
+}
+
+export function getChkd() {
+   return get('Chkd/')
+    .then(res => res.json());
+}
+
+export function addChkd(info, id) {
+   return post('Invt/' + id + '/Chkd', info)
+    .then(() => get('Invt/' + id + '/Chkd'))
+    .then(res => res.json());
 }
 
 const errMap = {

@@ -23,7 +23,8 @@ function mapStateToProps(state) {
       Errs: state.Errs,
       Ssns: state.Ssns,
       Msgs: state.Msgs,
-      Invt: state.Invt
+      Invt: state.Invt,
+      Chkd: state.Chkd
    };
 }
 

@@ -37,7 +37,6 @@ class Inventory extends Component {
    modalDismiss = (result) => {
       const newState = this.state;
       if (result.status === "Ok") {
-         console.log("OK: ", result);
          this.props.addInvt({
             itemName: result.itemName,
             quantity: result.quantity,
@@ -67,8 +66,18 @@ class Inventory extends Component {
 
    closeCheckOut = (result) => {
       console.log("RESULT: ", result);
-
-      this.setState({ showCheckOut: false });
+      if (result.status === "Ok") {
+         this.props.addChkd({
+            firstName: result.firstName,
+            lastName: result.lastName,
+            email: result.email
+         }, 
+         result.item.id,
+         () => {
+            this.props.updateQuantity(result.item.id, result.item.quantity-1);
+         });
+      }
+      this.setState({ showCheckOut: false, itemCheckOut: '' });
    }
 
    render() {
@@ -76,7 +85,7 @@ class Inventory extends Component {
       var Items = this.props.Invt
       .filter(item => {
          if (this.state.searchItem === "") return true;
-         else if (item.itemName.includes(this.state.searchItem)) return true;
+         else if (item.itemName.toLowerCase().includes(this.state.searchItem.toLowerCase())) return true;
          else return false;
       })
       .sort((a, b) => {

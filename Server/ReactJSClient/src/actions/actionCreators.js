@@ -151,7 +151,43 @@ export function delInvt(id, cb) {
        .catch(error => {
          console.log("ERROR IN DEL INVT");
          dispatch({type: 'LOGIN_ERR', details: error});
-       })
+      });
+   }
+}
+
+export function updateQuantity(id, q, cb) {
+   return (dispatch, prevState) => {
+      api.updateQuantity(id, q)
+       .then((invt) => dispatch({type: 'GET_ALL_INVT', invt: invt}))
+       .then(() => {if (cb) cb();})
+       .catch(error => {
+         console.log("ERROR IN UPDATE QUANTITY");
+         dispatch({type: 'LOGIN_ERR', details: error});
+      });
+   }
+}
+
+export function getChkd(cb) {
+   return (dispatch, prevState) => {
+      api.getChkd()
+       .then(chkd => {
+         return dispatch({type: 'GET_ALL_CHKD', chkd: chkd})})
+       .catch(error => {
+         console.log("ERROR IN GET CHKD", error);
+         dispatch({type: 'LOGIN_ERR', details: error});
+      });
+   }
+}
+
+export function addChkd(info, id, cb) {
+   return (dispatch, prevState) => {
+      api.addChkd(info, id)
+       .then((res) => dispatch({type: 'ADD_CHKD', chkd: res}))
+       .then(() => {if (cb) cb();})
+       .catch(error => {
+         console.log("ERROR IN DEL INVT: ", error);
+         dispatch({type: 'LOGIN_ERR', details: error});
+      });
    }
 }
 
