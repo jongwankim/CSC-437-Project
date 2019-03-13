@@ -88,7 +88,7 @@ router.put('/:invtId', function(req, res) {
    },
    function(invt, fields, cb) {
       if (vld.check(invt.length, Tags.notFound, null, cb) &&
-       vld.check(body.quantity, Tags.missingField, ["quantity"], cb) &&
+       vld.check(body.quantity >= 0, Tags.missingField, ["quantity"], cb) &&
        vld.checkForNonSpecifiedFieldsQuantity(Object.getOwnPropertyNames(body))) { 
          cnn.chkQry("update Inventory set quantity = ? where id = ?", 
           [body.quantity, id], cb);
