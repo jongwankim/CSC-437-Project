@@ -134,8 +134,7 @@ export function getInvt(cb) {
 export function addInvt(item, cb) {
    return (dispatch, prevState) => {
       api.addInvt(item)
-       .then(item => dispatch({type: 'ADD_INVT', item: item}))
-       .then(() => {if (cb) cb();})
+       .then(() => getInvt(cb)(dispatch, prevState))
        .catch(error => {
          console.log("ERROR IN ADD INVT");
          dispatch({type: 'LOGIN_ERR', details: error});
