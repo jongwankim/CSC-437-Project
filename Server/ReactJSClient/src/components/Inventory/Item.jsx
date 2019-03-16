@@ -19,7 +19,8 @@ class Item extends Component {
                <div>Quantity: {item.quantity}</div>
                <Button 
                   className="item-button"
-                  onClick={() => this.props.openCheckOut(item)}>
+                  onClick={() => this.props.openCheckOut(item)}
+                  disabled={item.quantity === 0}>
                   Checkout
                </Button>
                <Button className="item-button">
