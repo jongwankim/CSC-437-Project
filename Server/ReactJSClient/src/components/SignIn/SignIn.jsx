@@ -22,6 +22,7 @@ class SignIn extends Component {
 
    // Call redux actionCreator signin via props.
    signIn(event) {
+      console.log("in signin function")
       this.props.signIn(this.state, 
       () => this.props.history.push("/Inventory"),
       () => this.setState({ showError: true }));

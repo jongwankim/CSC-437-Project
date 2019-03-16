@@ -2,13 +2,41 @@ import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Col, 
  Row, Button } from 'react-bootstrap';
 import './CheckedOut.css';
+import { ConfDialog } from '../index';
 
 class CheckedOut extends Component {
    constructor(props) {
       super(props);
+      this.state = {
+         showConfDialog: false
+      };
       this.props.getChkd();
       this.props.getInvt();
+
+      this.closeConfDialog = this.closeConfDialog.bind(this);
+      this.openConfDialog = this.openConfDialog.bind(this);
    }
+
+   openConfDialog(chkdToReturn, itemToReturn) {
+      this.setState({
+         showConfDialog: true, 
+         chkdToReturn: chkdToReturn, 
+         itemToReturn: itemToReturn
+      });
+   }
+
+   closeConfDialog(result) {
+      if (result === 'Ok') {
+         this.props.delChkd(this.state.chkdToReturn.id, 
+          this.state.itemToReturn.id, this.state.itemToReturn.quantity);
+
+         this.props.getChkd();
+         this.props.getInvt();
+      }
+      this.setState({ showConfDialog: false });
+   }
+
+
 
    render() {
       var c = this.props.Chkd;
@@ -33,7 +61,11 @@ class CheckedOut extends Component {
                      })
                      .format(new Date(its.whenChecked))}
                   </Col>
-                  <Col xs={2}><Button>Return</Button></Col>
+                  <Col xs={2}>
+                     <Button onClick={() => this.openConfDialog(its, item)}>
+                        Return
+                     </Button>
+                  </Col>
                </Row>
                </ListGroupItem>
             );
@@ -43,7 +75,9 @@ class CheckedOut extends Component {
             <h3>{item.itemName}</h3>
             <ListGroup>
                {itemsToShow.length ? itemsToShow : 
-                  <ListGroupItem>None are checked out at this time</ListGroupItem>}
+                <ListGroupItem>
+                   None are checked out at this time
+                </ListGroupItem>}
             </ListGroup>
             </div>
          );
@@ -61,6 +95,11 @@ class CheckedOut extends Component {
             <ul>
                {display}
             </ul>
+            <ConfDialog show={this.state.showConfDialog} title={"Return Item"} 
+               body={'Are you sure you want to return the item "' + 
+                (this.state.itemToReturn && this.state.itemToReturn.itemName) + 
+                '"?'}
+               onClose={this.closeConfDialog} />
          </div>
       );
    }

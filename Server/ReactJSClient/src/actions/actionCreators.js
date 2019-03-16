@@ -190,4 +190,11 @@ export function addChkd(info, id, cb) {
    }
 }
 
-
+export function delChkd(chkdId, itemId, oldQuantity, cb) {
+   return (dispatch, prevState) => {
+      api.delChkd(chkdId)
+       .then(res => {
+         updateQuantity(itemId, oldQuantity + 1, cb)(dispatch, prevState)
+       })
+   }
+}

@@ -195,6 +195,10 @@ export function addChkd(info, id) {
     .then(res => res.json());
 }
 
+export function delChkd(id) {
+   return del('Chkd/' + id)
+}
+
 const errMap = {
     en: {
         missingField: 'Field missing from request: ',
