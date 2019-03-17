@@ -137,6 +137,7 @@ class Inventory extends Component {
          </Row>
          {Items.length ? Items : <h4>No items found</h4>}  
          <AddItem
+               {...this.props}
                showModal={this.state.showModal}
                title={this.state.editItem ? "Edit Item" : "New Item"}
                modalTitle={"Item"}

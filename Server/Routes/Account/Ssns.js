@@ -22,9 +22,10 @@ router.get('/', function(req, res) {
 
 // endpoint generates a browser-session cookie
 router.post('/', function(req, res) {
+
+
    var cookie;
    var cnn = req.cnn;
-
    cnn.query('select * from Person where email = ?', [req.body.email],
     function(err, result) {
       if (req.validator.check(result.length && result[0].password ===

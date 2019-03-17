@@ -1,5 +1,11 @@
 import * as api from '../api';
 
+export function upload(file) {
+   return (dispatch, prevState) => {
+      api.upload(file);
+   }
+}
+
 export function clearErrs() {
    return (dispatch, prevState) => {
       dispatch({type: "REMOVE_ERRS"});

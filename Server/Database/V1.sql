@@ -1,3 +1,7 @@
+drop database if exists drifkin;
+create database drifkin;
+use drifkin;
+
 create table Person (
   id int auto_increment primary key,
   firstName varchar(30),

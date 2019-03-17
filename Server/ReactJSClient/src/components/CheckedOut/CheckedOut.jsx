@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Col, 
- Row, Button } from 'react-bootstrap';
+ Row, Button, Form, FormGroup,
+ ControlLabel, FormControl } from 'react-bootstrap';
 import './CheckedOut.css';
 
 class CheckedOut extends Component {
@@ -8,6 +9,18 @@ class CheckedOut extends Component {
       super(props);
       this.props.getChkd();
       this.props.getInvt();
+
+      this.state = {
+         searchItem: ''
+      }
+
+      this.handleChange = this.handleChange.bind(this);
+   }
+
+   handleChange(event) {
+      const newState = {};
+      newState[event.target.name] = event.target.value;
+      this.setState(newState);
    }
 
    render() {
@@ -47,20 +60,56 @@ class CheckedOut extends Component {
             </ListGroup>
             </div>
          );
-
-      })
-
-      var chkds = c.map((item, index) => {
-         return (
-            <li key={index}>{item.firstName}</li>
-         );
       });
 
       return (
          <div className="container">
+         <Row>
+         <Col xs={4}>
+         <Form horizontal>
+            <FormGroup controlId="formHorizontalEmail">
+               <FormControl
+                type="searchItem"
+                name="searchItem"
+                placeholder="Search By Item"
+                value={this.state.searchItem}
+                onChange={this.handleChange}
+                />
+            </FormGroup>
+         </Form>
+         </Col>
+         <Col xs={4}>
+         <Form horizontal>
+            <FormGroup controlId="formHorizontalEmail">
+               <FormControl
+                type="searchItem"
+                name="searchItem"
+                placeholder="Search By Name"
+                value={this.state.searchItem}
+                onChange={this.handleChange}
+                />
+            </FormGroup>
+         </Form>
+         </Col>
+         <Col xs={4}>
+         <Form horizontal>
+            <FormGroup controlId="formHorizontalEmail">
+               <FormControl
+                type="searchItem"
+                name="searchItem"
+                placeholder="Search By Email"
+                value={this.state.searchItem}
+                onChange={this.handleChange}
+                />
+            </FormGroup>
+         </Form>
+         </Col>
+         </Row>
+         <div>
             <ul>
                {display}
             </ul>
+         </div>
          </div>
       );
    }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {
    Modal, Button, FormControl, ControlLabel, FormGroup, HelpBlock
 } from 'react-bootstrap';
+import ImageUploader from 'react-images-upload';
+import axios from 'axios';
 
 export default class AddItem extends Component {
    constructor(props) {
@@ -9,8 +11,26 @@ export default class AddItem extends Component {
       this.state = {
          itemName: '',
          quantity: 0,
-         url: ''
+         url: '',
+         picture: ''
       }
+
+      this.onChange = this.onChange.bind(this);
+      this.onFormSubmit = this.onFormSubmit.bind(this);
+   }
+
+   onFormSubmit = (e) => {
+      e.preventDefault();
+      var file = new FormData();
+      file.append('file', this.state.picture);
+      file.append('name', "file")
+      this.props.upload(this.state.picture);
+
+   }
+
+   onChange = (e) => {
+      console.log("ON CHANGE...");
+      this.setState({ picture: e.target.files[0]});
    }
 
    close = (result) => {
@@ -23,7 +43,8 @@ export default class AddItem extends Component {
       this.setState({
          itemName: '',
          quantity: 0,
-         url: ''
+         url: '',
+         picture: ''
       });
    }
 
@@ -69,16 +90,20 @@ export default class AddItem extends Component {
                         onChange={this.handleChange}
                      />
                   <br />
-                  <ControlLabel>URL to image</ControlLabel>
-                     <FormControl
-                        id="url"
-                        type="text"
-                        value={this.state.url}
-                        placeholder="Enter URL"
-                        onChange={this.handleChange}
-                     />
+                  {/*this.state.imgUploaded 
+                     ? (<img src="" width="50" height="50" />)
+                     : (<ImageUploader
+                     withIcon={true}
+                     buttonText='Choose images'
+                     onChange={this.onDrop}
+                     imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                     maxFileSize={5242880}
+                  />)*/}
+                  
                   </FormGroup>
                </form>
+                  <input name="file" type="file" onChange={this.onChange} />
+                  <Button onClick={this.onFormSubmit}>Upload</Button>
             </Modal.Body>
             <Modal.Footer>
                <Button 

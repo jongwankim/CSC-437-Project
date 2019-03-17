@@ -7,6 +7,23 @@ const MAX_MSG_LENGTH = 5000;
 
 router.baseURL = '/Invt';
 
+
+var multer = require('multer');
+var storage = multer.diskStorage({
+   destination: function(req, file, cb) {
+      cb(null, 'images/');
+   },
+   filename: function(req, file, cb) {
+      cb(null, file.originalname)
+   }
+});
+var upload = multer({storage: storage});
+
+
+router.post('/Upload', upload.single('file'), (req, res) => {
+   console.log("FILE IS: ", Object.keys(req));
+});
+
 // endpoint returns array of iventory item(s)
 router.get('/', function(req, res) {
    var cnn = req.cnn;

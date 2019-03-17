@@ -74,6 +74,12 @@ export function del(endpoint) {
    });
 }
 
+export function upload(file) {
+   return post("Invt/Upload", file)
+    .then(res => console.log("RETURNED FROM POST IN API"))
+    .catch(error => console.log("ERROR: ", error));
+}
+
 // Functions for performing the api requests
 
 /**

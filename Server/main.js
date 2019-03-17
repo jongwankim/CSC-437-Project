@@ -6,7 +6,13 @@ var Session = require('./Routes/Session.js');
 var Validator = require('./Routes/Validator.js');
 var CnnPool = require('./Routes/CnnPool.js');
 var async = require('async');
+//var fileUpload = require('express-fileupload');
 var app = express();
+var busboy = require('connect-busboy');
+var ecstatic = require('ecstatic');
+var http = require('http');
+
+
 
 const STATUS_200 = 200;
 const STATUS_400 = 400;
@@ -15,8 +21,13 @@ const STATUS_404 = 404;
 const STATUS_500 = 500;
 const PORT_INDEX = 3;
 
+
+
 // Static paths to be served like index.html and all client side js
+console.log("DIRNAME: ", __dirname);
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('__dirname' + '/ReactJSClient/public/images', express.static('images'));
 
 app.use(function(req, res, next) {
    console.log("Handling " + req.path + '/' + req.method);
@@ -25,10 +36,16 @@ app.use(function(req, res, next) {
    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, " +
     "DELETE, OPTIONS");
    res.header("Access-Control-Expose-Headers", "Location");
-   res.header("Access-Control-Allow-Headers", "Content-Type");
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
    next();
 });
+
+// Use file upload
+//app.use(fileUpload());
+
+// default options, no immediate parsing
+app.use(busboy());
 
 // No further processing needed for options calls.
 app.options("/*", function(req, res) {
@@ -37,7 +54,8 @@ app.options("/*", function(req, res) {
 
 // Static path to index.html and all clientside js
 // Parse all request bodies using JSON
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '10mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 // Attach cookies to req as req.cookies.<cookieName>
 app.use(cookieParser());
@@ -138,3 +156,10 @@ if (process.argv.length > 2) {
 app.listen(port, function() {
    console.log('App Listening on port ' + port);
 });
+/*
+app.use(ecstatic({
+  root: `${__dirname}/ReactJSClient/public/images`,
+  showdir: true,
+}));
+
+http.createServer(app).listen(3001);*/
