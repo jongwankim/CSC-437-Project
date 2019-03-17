@@ -28,10 +28,8 @@ class CheckedOut extends Component {
    closeConfDialog(result) {
       if (result === 'Ok') {
          this.props.delChkd(this.state.chkdToReturn.id, 
-          this.state.itemToReturn.id, this.state.itemToReturn.quantity);
-
-         this.props.getChkd();
-         this.props.getInvt();
+          this.state.itemToReturn.id, this.state.itemToReturn.quantity,
+          () => {this.props.getChkd(); this.props.getInvt();});
       }
       this.setState({ showConfDialog: false });
    }
