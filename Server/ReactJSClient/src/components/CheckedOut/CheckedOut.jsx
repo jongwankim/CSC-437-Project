@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem, Col, 
- Row, Button } from 'react-bootstrap';
 import './CheckedOut.css';
 import { ConfDialog } from '../index';
+import { Row, Col, Form, FormGroup, 
+   FormControl, ControlLabel, Button,
+   ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class CheckedOut extends Component {
    constructor(props) {
       super(props);
       this.state = {
+         searchItem: "",
+         searchEmail: "",
          showConfDialog: false
       };
       this.props.getChkd();
@@ -15,6 +18,13 @@ class CheckedOut extends Component {
 
       this.closeConfDialog = this.closeConfDialog.bind(this);
       this.openConfDialog = this.openConfDialog.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+   }
+
+   handleChange(event) {
+      const newState = {};
+      newState[event.target.name] = event.target.value;
+      this.setState(newState);
    }
 
    openConfDialog(chkdToReturn, itemToReturn) {
@@ -37,13 +47,23 @@ class CheckedOut extends Component {
 
 
    render() {
-      var c = this.props.Chkd;
-      var i = this.props.Invt;
+      var c = this.props.Chkd.filter(item => {
+         if (this.state.searchEmail === "") return true;
+         else if (item.email.toLowerCase().includes(this.state.searchEmail.toLowerCase())) return true;
+         else return false;
+      });
+
+      var i = this.props.Invt.filter(item => {
+         if (this.state.searchItem === "") return true;
+         else if (item.itemName.toLowerCase().includes(this.state.searchItem.toLowerCase())) return true;
+         else return false;
+      });
 
       var display = i.map((item, index) => {
          var itemsCheckedOut = c.filter(chkd => {
             return chkd.invtId === item.id;
          });
+
          var itemsToShow = itemsCheckedOut.map((its, index) => {
             console.log("ADDING: ", its.firstName);
             return (
@@ -68,17 +88,18 @@ class CheckedOut extends Component {
                </ListGroupItem>
             );
          });
-         return (
-            <div key={index}>
-            <h3>{item.itemName}</h3>
-            <ListGroup>
-               {itemsToShow.length ? itemsToShow : 
-                <ListGroupItem>
-                   None are checked out at this time
-                </ListGroupItem>}
-            </ListGroup>
-            </div>
-         );
+         if (itemsToShow.length) {
+            return (
+               <div key={index}>
+               <h3>{item.itemName}</h3>
+               <ListGroup>
+                  {itemsToShow.length ? itemsToShow : null}
+               </ListGroup>
+               </div>
+            )
+         } else {
+            return null;
+         };
 
       })
 
@@ -90,6 +111,44 @@ class CheckedOut extends Component {
 
       return (
          <div className="container">
+            <Row>
+            <Col xs={10}>
+            <Form horizontal>
+               <FormGroup controlId="formHorizontalEmail">
+                  <Col componentClass={ControlLabel} sm={2}>
+                     Search
+                  </Col>
+                  <Col sm={10}>
+                     <FormControl
+                     type="searchItem"
+                     name="searchItem"
+                     placeholder="Item to search"
+                     value={this.state.searchItem}
+                     onChange={this.handleChange}
+                     />
+                  </Col>
+               </FormGroup>
+            </Form>
+            </Col>
+            <Col xs={10}>
+            <Form horizontal>
+               <FormGroup controlId="formHorizontalEmail">
+                  <Col componentClass={ControlLabel} sm={2}>
+                     Search
+                  </Col>
+                  <Col sm={10}>
+                     <FormControl
+                     type="searchEmail"
+                     name="searchEmail"
+                     placeholder="Email to search"
+                     value={this.state.searchEmail}
+                     onChange={this.handleChange}
+                     />
+                  </Col>
+               </FormGroup>
+            </Form>
+            </Col>
+            </Row>
             <ul>
                {display}
             </ul>

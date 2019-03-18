@@ -37,7 +37,8 @@ app.options("/*", function(req, res) {
 
 // Static path to index.html and all clientside js
 // Parse all request bodies using JSON
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '10mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 // Attach cookies to req as req.cookies.<cookieName>
 app.use(cookieParser());
