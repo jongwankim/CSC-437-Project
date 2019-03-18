@@ -10,7 +10,7 @@ router.baseURL = '/Invt';
 var multer = require('multer');
 var storage = multer.diskStorage({
    destination: function(req, file, cb) {
-      cb(null, 'images/');
+      cb(null, 'ReactJSClient/public/images');
    },
    filename: function(req, file, cb) {
       cb(null, file.originalname)
@@ -20,7 +20,8 @@ var upload = multer({storage: storage});
 
 
 router.post('/Upload', upload.single('file'), (req, res) => {
-   console.log("FILE IS: ", Object.keys(req));
+   res.status(200).end();
+   req.cnn.release();
 });
 
 // endpoint returns array of iventory item(s)

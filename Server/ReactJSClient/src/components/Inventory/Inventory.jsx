@@ -40,8 +40,7 @@ class Inventory extends Component {
          this.props.addInvt({
             itemName: result.itemName,
             quantity: result.quantity,
-            url: result.url
-         });
+         }, result.file);
       }
       this.setState({ showModal: false });
    }

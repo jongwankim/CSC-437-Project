@@ -169,9 +169,6 @@ export function getInvt() {
 
 export function addInvt(item) {
    return post('Invt/', item)
-    .then(res => {
-      return item;
-    });
 }
 
 export function updateQuantity(id, quantity) {
@@ -199,11 +196,11 @@ export function delChkd(id) {
    return del('Chkd/' + id)
 }
 
-export function upload(formData) {
+export function upload(formData, name) {
    return myFetch(baseURL + 'Invt/Upload', {
       method: 'POST',
       credentials: 'include',
-      body: formData
+      body: formData,
    })
 }
 

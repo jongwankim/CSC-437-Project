@@ -18,9 +18,9 @@ export function signIn(credentials, cb, errorcb) {
    };
 }
 
-export function upload(file) {
+export function upload(file, name) {
    return (dispatch, prevState) => {
-      api.upload(file);
+      api.upload(file, name);
    }
 }
 
@@ -137,12 +137,20 @@ export function getInvt(cb) {
    }
 }
 
-export function addInvt(item, cb) {
+export function addInvt(item, file, cb) {
    return (dispatch, prevState) => {
       api.addInvt(item)
+       .then(res => {
+         var blob = file.slice(0, file.size, 'image/png');
+         var newFile = new File([blob], res.headers.get('Location').split('/')[2] + '.png', {type: 'image/png'});
+         var fileForm = new FormData();
+         fileForm.append('file', newFile);
+         upload(fileForm, 
+            res.headers.get('Location').split('/')[2])(dispatch, prevState);
+       } )
        .then(() => getInvt(cb)(dispatch, prevState))
        .catch(error => {
-         console.log("ERROR IN ADD INVT");
+         console.log("ERROR IN ADD INVT ", error);
          dispatch({type: 'LOGIN_ERR', details: error});
        })
    }

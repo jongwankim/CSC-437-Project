@@ -9,24 +9,14 @@ export default class AddItem extends Component {
       this.state = {
          itemName: '',
          quantity: 0,
-         url: '',
-         picture: ''
+         file: null
       }
       this.onChange = this.onChange.bind(this);
-      this.onFormSubmit = this.onFormSubmit.bind(this);
-   }
-
-   onFormSubmit = (e) => {
-      e.preventDefault();
-      var file = new FormData();
-      file.append('file', this.state.picture);
-      file.append('name', "file");
-      this.props.upload(file);
    }
 
    onChange = (e) => {
-      console.log("ON CHANGE...");
-      this.setState({ picture: e.target.files[0]});
+      e.preventDefault();
+      this.setState({ file: e.target.files[0] });
    }
 
    close = (result) => {
@@ -34,16 +24,14 @@ export default class AddItem extends Component {
          status: result,
          itemName: this.state.itemName,
          quantity: this.state.quantity,
-         url: this.state.url
+         file: this.state.file
       });
       this.setState({
          itemName: '',
          quantity: 0,
-         url: '',
-         picture: ''
+         file: null
       });
    }
-
 
    handleChange = (ev) => {
       let newState = {};
@@ -53,7 +41,7 @@ export default class AddItem extends Component {
 
    formValid() {
       let s = this.state;
-      return s.quantity && s.itemName && s.url;
+      return s.quantity && s.itemName && s.file;
    }
 
    render() {
@@ -86,18 +74,10 @@ export default class AddItem extends Component {
                         onChange={this.handleChange}
                      />
                   <br />
-                  <ControlLabel>URL to image</ControlLabel>
-                     <FormControl
-                        id="url"
-                        type="text"
-                        value={this.state.url}
-                        placeholder="Enter URL"
-                        onChange={this.handleChange}
-                     />
+                  <ControlLabel>Select image</ControlLabel>
                   </FormGroup>
                </form>
                <input name="file" type="file" onChange={this.onChange} />
-                  <Button onClick={this.onFormSubmit}>Upload</Button>
             </Modal.Body>
             <Modal.Footer>
                <Button 
