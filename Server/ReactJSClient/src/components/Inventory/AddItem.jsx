@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
    Modal, Button, FormControl, ControlLabel, FormGroup, HelpBlock
 } from 'react-bootstrap';
-import ImageUploader from 'react-images-upload';
+// import ImageUploader from 'react-images-upload';
 import axios from 'axios';
 
 export default class AddItem extends Component {
@@ -23,9 +23,8 @@ export default class AddItem extends Component {
       e.preventDefault();
       var file = new FormData();
       file.append('file', this.state.picture);
-      file.append('name', "file")
-      this.props.upload(this.state.picture);
-
+      file.append('name', "file");
+      this.props.upload(file);
    }
 
    onChange = (e) => {

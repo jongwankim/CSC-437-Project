@@ -42,6 +42,14 @@ const myFetch = (url, arg) => {
    });
 };
 
+export function upload(formData) {
+   return myFetch(baseURL + 'Invt/Upload', {
+      method: 'POST',
+      credentials: 'include',
+      body: formData
+   })
+}
+
 // Helper functions for the comon request types, automatically
 // adding verb, headers, and error management.
 export function post(endpoint, body) {
@@ -72,12 +80,6 @@ export function del(endpoint) {
       method: 'DELETE',
       ...reqConf
    });
-}
-
-export function upload(file) {
-   return post("Invt/Upload", file)
-    .then(res => console.log("RETURNED FROM POST IN API"))
-    .catch(error => console.log("ERROR: ", error));
 }
 
 // Functions for performing the api requests
