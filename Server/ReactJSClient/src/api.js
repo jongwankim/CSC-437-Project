@@ -169,7 +169,7 @@ const errMap = {
         forbiddenRole: 'Role specified is not permitted.',
         noOldPwd: 'Change of password requires an old password',
         oldPwdMismatch: 'Old password that was provided is incorrect.',
-        dupTitle: 'Conversation title duplicates an existing one',
+        dupName: 'Item name duplicates an existing one',
         dupEnrollment: 'Duplicate enrollment',
         forbiddenField: 'Field in body not allowed.',
         queryFailed: 'Query failed (server problem).'
