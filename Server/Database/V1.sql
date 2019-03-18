@@ -14,7 +14,6 @@ create table Inventory (
   id int auto_increment primary key,
   itemName varchar(80) not null,
   quantity int not null,
-  url varchar(250),
   unique key UK_name(itemName)
 );
 

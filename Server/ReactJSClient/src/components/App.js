@@ -9,7 +9,6 @@ import { withRouter } from 'react-router-dom';
 import * as actionCreators from '../actions/actionCreators';
 import Main from './Main/Main';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIgloo } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faIgloo)
@@ -19,10 +18,8 @@ function mapStateToProps(state) {
    console.log("State is " + JSON.stringify(state));
    return {
       Prss: state.Prss,
-      Cnvs: state.Cnvs,
       Errs: state.Errs,
       Ssns: state.Ssns,
-      Msgs: state.Msgs,
       Invt: state.Invt,
       Chkd: state.Chkd
    };

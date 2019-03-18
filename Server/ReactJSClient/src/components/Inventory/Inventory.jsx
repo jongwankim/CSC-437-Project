@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Item from './Item';
 import { Row, Col, Form, FormGroup, 
-   FormControl, ControlLabel, Button,
-   ListGroup, ListGroupItem } from 'react-bootstrap';
+   FormControl, ControlLabel, Button } from 'react-bootstrap';
 import AddItem from './AddItem';
 import ConfirmDelete from './ConfirmDelete';
 import CheckOutModal from '../CheckedOut/CheckOutModal';
@@ -35,7 +34,6 @@ class Inventory extends Component {
    }
 
    modalDismiss = (result) => {
-      const newState = this.state;
       if (result.status === "Ok") {
          this.props.addInvt({
             itemName: result.itemName,

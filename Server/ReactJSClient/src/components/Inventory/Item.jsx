@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Button, Row, Col } from 'react-bootstrap';
+import { Image, Button } from 'react-bootstrap';
 import './Inventory.css';
 
 class Item extends Component {

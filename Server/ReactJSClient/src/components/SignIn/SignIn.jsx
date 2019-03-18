@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, FormControl, 
- Button, ControlLabel, Alert } from 'react-bootstrap';
-import { ConfDialog } from '../index';
+ Button, ControlLabel } from 'react-bootstrap';
 import './SignIn.css';
 
 class SignIn extends Component {

@@ -103,12 +103,6 @@ class CheckedOut extends Component {
 
       })
 
-      var chkds = c.map((item, index) => {
-         return (
-            <li key={index}>{item.firstName}</li>
-         );
-      });
-
       return (
          <div className="container">
             <Row>

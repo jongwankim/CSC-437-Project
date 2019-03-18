@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Register, SignIn, CnvOverview, 
-   CnvDetail, Inventory, CheckedOut } from '../index';
+import { Register, SignIn, Inventory, CheckedOut } from '../index';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { Navbar, Nav, NavItem, Alert } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';

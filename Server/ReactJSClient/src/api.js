@@ -116,52 +116,6 @@ export function postPrs(user) {
    //.then(rsp => rsp.json());
 }
 
-/**
- * @returns {Promise} json parsed data
- */
-export function getCnvs(userId) {
-   return get("Cnvs" + (userId ? "?owner="+userId : ""))
-    .then((res) => res.json());
-}
-
-export function getCnvById(cnvId) {
-   return get("Cnvs/" + cnvId)
-    .then((res) => res.json());
-}
-
-export function putCnv(id, body) {
-   return put(`Cnvs/${id}`, {title: body})
-    .then((rsp) => {
-       return get(`Cnvs/${id}`).then(rsp => rsp.json());
-    });
-}
-
-export function postCnv(body) {
-   return post('Cnvs', body).then(rsp => {
-      let location = rsp.headers.get("Location").split('/');
-      return get(`Cnvs/${location[location.length-1]}`);
-   }).then(rsp => rsp.json());
-}
-
-export function delCnv(id) {
-   return del("Cnvs/" + id);
-}
-
-
-export function getMsgs(cnvId) {
-   return get("Cnvs/" + cnvId + "/Msgs")
-    .then(res => res.json());
-}
-
-export function newMsg(msg, cnvId) {
-   return post('Cnvs/' + cnvId + '/Msgs', msg)
-    .then(res => {
-      let loc = res.headers.get("Location").split('/');
-      return get(`Msgs/${loc[loc.length-1]}`);
-    })
-    .then(rsp => rsp.json());
-}
-
 export function getInvt() {
    return get('Invt/')
    .then(res => res.json());

@@ -30,7 +30,7 @@ router.get('/', function(req, res) {
 
    async.waterfall([
    function(cb) { 
-      cnn.chkQry('select id, itemName, quantity, url from Inventory', null, cb);
+      cnn.chkQry('select id, itemName, quantity from Inventory', null, cb);
    },
    function(result, fields, cb) {
       res.status(STATUS_200).json(result);
@@ -58,7 +58,7 @@ router.post('/', function(req, res) {
       if (vld.checkForNonSpecifiedFieldsInvt(Object.getOwnPropertyNames(body))
        .check(!existingInvt.length, Tags.dupName, null, cb)) { 
          cnn.chkQry("insert into Inventory set ?", 
-          {itemName: body.itemName, quantity: body.quantity, url: body.url}, cb);
+          {itemName: body.itemName, quantity: body.quantity}, cb);
       }
    },
    function(insRes, fields, cb) {
@@ -78,7 +78,7 @@ router.get('/:invtId', function(req, res) {
 
    async.waterfall([
    function(cb) {
-      cnn.chkQry('select id, itemName, quantity, url from ' +
+      cnn.chkQry('select id, itemName, quantity from ' +
        'Inventory where id = ?', [id], cb);
    },
    function(result, fields, cb) {

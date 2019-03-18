@@ -89,9 +89,6 @@ class Register extends Component {
    }
 
    render() {
-      const Errs = this.props.Errs.length ? this.props.Errs.map((err, i) => {
-         return (<Alert type="danger" key={i} >{err}</Alert>)
-      }) : '';
 
       return (
          <div className="container">

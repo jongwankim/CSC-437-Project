@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {
-   Modal, Button, FormControl, ControlLabel, FormGroup, HelpBlock
-} from 'react-bootstrap';
+import { Modal, Button, FormControl, ControlLabel, FormGroup } 
+ from 'react-bootstrap';
 
 export default class CheckOutModal extends Component {
    constructor(props) {
