@@ -18,6 +18,12 @@ export function signIn(credentials, cb, errorcb) {
    };
 }
 
+export function upload(file) {
+   return (dispatch, prevState) => {
+      api.upload(file);
+   }
+}
+
 export function signOut(cb) {
    return (dispatch, prevState) => {
       api.signOut()

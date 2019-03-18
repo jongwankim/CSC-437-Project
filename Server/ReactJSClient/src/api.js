@@ -199,6 +199,14 @@ export function delChkd(id) {
    return del('Chkd/' + id)
 }
 
+export function upload(formData) {
+   return myFetch(baseURL + 'Invt/Upload', {
+      method: 'POST',
+      credentials: 'include',
+      body: formData
+   })
+}
+
 const errMap = {
     en: {
         missingField: 'Field missing from request: ',

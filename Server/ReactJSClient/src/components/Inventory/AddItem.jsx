@@ -9,8 +9,24 @@ export default class AddItem extends Component {
       this.state = {
          itemName: '',
          quantity: 0,
-         url: ''
+         url: '',
+         picture: ''
       }
+      this.onChange = this.onChange.bind(this);
+      this.onFormSubmit = this.onFormSubmit.bind(this);
+   }
+
+   onFormSubmit = (e) => {
+      e.preventDefault();
+      var file = new FormData();
+      file.append('file', this.state.picture);
+      file.append('name', "file");
+      this.props.upload(file);
+   }
+
+   onChange = (e) => {
+      console.log("ON CHANGE...");
+      this.setState({ picture: e.target.files[0]});
    }
 
    close = (result) => {
@@ -23,7 +39,8 @@ export default class AddItem extends Component {
       this.setState({
          itemName: '',
          quantity: 0,
-         url: ''
+         url: '',
+         picture: ''
       });
    }
 
@@ -79,6 +96,8 @@ export default class AddItem extends Component {
                      />
                   </FormGroup>
                </form>
+               <input name="file" type="file" onChange={this.onChange} />
+                  <Button onClick={this.onFormSubmit}>Upload</Button>
             </Modal.Body>
             <Modal.Footer>
                <Button 
