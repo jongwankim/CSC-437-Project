@@ -23,9 +23,6 @@ class Item extends Component {
                   disabled={item.quantity === 0}>
                   Checkout
                </Button>
-               <Button className="item-button">
-                  Items In Use
-               </Button>  
             </div>
             </div>
       );
